@@ -119,9 +119,10 @@ class ClassMetadata extends MergeableClassMetadata implements ClassMetadataInter
         $this->resource = $object->getResource();
         $this->idField = $object->getIdField();
 
-        foreach ($object->getRelationships() as $relationship) {
-            $this->addRelationship($relationship);
-        }
+        //foreach ($object->getRelationships() as $relationship) {
+            //$this->addRelationship($relationship);
+        //}
+        $this->setRelationships($object->getRelationships());
     }
 
     /**
