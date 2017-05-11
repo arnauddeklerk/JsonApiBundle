@@ -13,6 +13,7 @@ namespace Mango\Bundle\JsonApiBundle\Serializer;
 
 use Hateoas\Representation\CollectionRepresentation;
 use Hateoas\Representation\PaginatedRepresentation;
+use JMS\Serializer\Accessor\AccessorStrategyInterface;
 use JMS\Serializer\Context;
 use JMS\Serializer\JsonSerializationVisitor;
 use Mango\Bundle\JsonApiBundle\Configuration\Metadata\ClassMetadata as JsonApiClassMetadata;
@@ -40,18 +41,19 @@ class JsonApiSerializationVisitor extends JsonSerializationVisitor
 
     /**
      * @param PropertyNamingStrategyInterface $propertyNamingStrategy
-     * @param MetadataFactoryInterface        $metadataFactory
-     * @param                                 $showVersionInfo
+     * @param AccessorStrategyInterface|null  $accessorStrategy
+     * @param MetadataFactoryInterface|null   $metadataFactory
+     * @param bool                            $showVersionInfo
      */
     public function __construct(
-        PropertyNamingStrategyInterface $propertyNamingStrategy,
-        MetadataFactoryInterface $metadataFactory,
-        $showVersionInfo
+      PropertyNamingStrategyInterface $propertyNamingStrategy,
+      AccessorStrategyInterface $accessorStrategy = null,
+      MetadataFactoryInterface $metadataFactory = null,
+      $showVersionInfo = false
     ) {
-        parent::__construct($propertyNamingStrategy);
-
-        $this->metadataFactory = $metadataFactory;
-        $this->showVersionInfo = $showVersionInfo;
+      parent::__construct($propertyNamingStrategy, $accessorStrategy);
+      $this->metadataFactory = $metadataFactory;
+      $this->showVersionInfo = $showVersionInfo;
     }
 
     /**
