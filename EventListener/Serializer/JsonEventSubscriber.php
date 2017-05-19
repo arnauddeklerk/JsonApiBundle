@@ -12,6 +12,8 @@
 namespace Mango\Bundle\JsonApiBundle\EventListener\Serializer;
 
 use Doctrine\Common\Util\ClassUtils;
+use Doctrine\Common\Persistence\Proxy;
+use Doctrine\ORM\Proxy\Proxy as ORMProxy;
 use JMS\Serializer\Context;
 use JMS\Serializer\EventDispatcher\Events;
 use JMS\Serializer\EventDispatcher\EventSubscriberInterface;
