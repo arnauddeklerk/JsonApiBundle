@@ -117,8 +117,14 @@ class JsonEventSubscriber implements EventSubscriberInterface
             return;
         }
 
+        if ($object instanceof Proxy || $object instanceof ORMProxy) {
+            $class = get_parent_class($object);
+        } else {
+            $class = get_class($object);
+        }
+
         /** @var \JMS\Serializer\Metadata\ClassMetadata $jmsMetadata */
-        $jmsMetadata = $this->jmsMetadataFactory->getMetadataForClass(get_class($object));
+        $jmsMetadata = $this->jmsMetadataFactory->getMetadataForClass($class);
 
         $propertyAccessor = PropertyAccess::createPropertyAccessor();
 
